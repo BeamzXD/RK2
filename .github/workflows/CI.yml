@@ -18,9 +18,9 @@ jobs:
 
     - name: Config webpage_button with tests
       run: cmake -H. -B ${{github.workspace}}/build -DBUILD_TESTS=ON
-    
-    - name: Test webpage_button
-      run: cmake --build _build --target test -- ARGS=--verbose
 
     - name: Build webpage_button
-      run: cmake --build ${{github.workspace}}/build
+      run: cmake --build ${{github.workspace}}/build  
+  
+    - name: Run tests
+      run: build/check
