@@ -18,3 +18,5 @@ if(BUILD_TESTS)
   target_link_libraries(check scr gtest_main)
   add_test(NAME check COMMAND check)
 endif()
+
+include(CPack.cmake)

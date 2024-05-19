@@ -1,0 +1,15 @@
+include(InstallRequiredSystemLibraries)
+
+set(CPACK_PACKAGE_NAME "RK2")
+set(CPACK_PACKAGE_VENDOR "BeamzXD")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "RK2 project")
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://github.com/BeamzXD/RK2")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "RK2")
+
+
+set(CPACK_GENERATOR "TGZ;ZIP")
+
+
+install(TARGETS RK2 DESTINATION bin)
+
+include(CPack)

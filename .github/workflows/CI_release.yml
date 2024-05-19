@@ -1,0 +1,42 @@
+name: CI webpage_button
+
+on:
+ push:
+   tags:
+     - v*.*.*
+
+jobs: 
+
+  build_packages_Linux:
+
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Adding gtest
+      run: git clone https://github.com/google/googletest.git third-party/gtest -b release-1.11.0
+
+    - name: Config webpage_button with tests
+      run: cmake -H. -B ${{github.workspace}}/build -DBUILD_TESTS=ON
+
+    - name: Build webpage_button
+      run: cmake --build ${{github.workspace}}/build  
+  
+    - name: Run tests
+      run: build/check
+
+    - name: Build package
+      run: cmake --build ${{github.workspace}}/build --target package
+
+    - name: Build source package
+      run: cmake --build ${{github.workspace}}/build --target package_source
+
+    - name: Make a release
+      uses: ncipollo/release-action@v1.14.0
+      with:
+        artifacts: "build/*.deb,build/*.rpm,build/*.tar.gz,build/*.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
