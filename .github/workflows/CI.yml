@@ -1,21 +1,26 @@
 name: CI webpage_button
 
 on:
- push:
-  branches: [main]
- pull_request:
-  branches: [main]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-jobs: 
- build_Linux:
+jobs:
+  build_Linux:
+    runs-on: ubuntu-latest
 
-  runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
 
-  steps:
-  - uses: actions/checkout@v3
+    - name: Adding gtest
+      run: git clone https://github.com/google/googletest.git third-party/gtest -b release-1.11.0
 
-  - name: Configure webpage_button
-    run: cmake ${{github.workspace}} -B ${{github.workspace}}/build
+    - name: Config webpage_button with tests
+      run: cmake -H. -B ${{github.workspace}}/build -DBUILD_TESTS=ON
 
-  - name: Build webpage_button
-    run: cmake --build ${{github.workspace}}/build
+    - name: Build webpage_button
+      run: cmake --build ${{github.workspace}}/build  
+  
+    - name: Run tests
+      run: build/check
