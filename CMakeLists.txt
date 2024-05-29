@@ -11,7 +11,7 @@ add_library(scr STATIC ${CMAKE_CURRENT_SOURCE_DIR}/scr/webpage_button.cpp)
 target_include_directories(scr PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/scr)
 
 add_executable(main_exe ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
-target_link_libraries(main_exe scr)
+target_link_libraries(scr PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/scr)
 
 if(BUILD_TESTS)
   enable_testing()
