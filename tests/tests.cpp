@@ -79,3 +79,14 @@ TEST(ButtonTest, ChangeCommand) {
     std::string expected = "Change web page to " + url + ".\nThis is generic command.\n";
     EXPECT_EQ(output.str(), expected);
 }
+
+TEST(MainTest, RunMainLogic) {
+    std::stringstream output;
+    std::streambuf* oldCoutBuf = std::cout.rdbuf(output.rdbuf());
+
+    RunMainLogic();
+
+    std::cout.rdbuf(oldCoutBuf);
+    std::string expected = "Change web page to http://taeguk.me.\nThis is generic command.\n";
+    EXPECT_EQ(output.str(), expected);
+}

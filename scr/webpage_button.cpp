@@ -96,4 +96,26 @@ private:
     추상화된 베이스 클래스인 Command 클래스는 Receiver에 대한 의존성을 가지지 않습니다.
     따라서, Invoker 측은 Receiver에 대한 직접적인 의존성 없이 명령을 요청할 수 있게 됩니다.
 */
+void RunMainLogic()
+{
+    WebPageManager webPageManager;
+    ChangeWebPageCommand changeWebPageCommand(webPageManager, "http://taeguk.me");
 
+    Button button(&changeWebPageCommand);
+    button.Click();
+
+    auto genericCommand = MakeGenericCommand(
+        []() -> void
+        {
+            std::cout << "This is generic command." << std::endl;
+        });
+
+    button.ChangeCommand(&genericCommand);
+    button.Click();
+}
+
+int main()
+{
+    RunMainLogic();
+    return 0;
+}
