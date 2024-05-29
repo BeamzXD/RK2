@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(scr STATIC ${CMAKE_CURRENT_SOURCE_DIR}/scr/webpage_button.cpp)
 target_include_directories(scr PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/scr)
 
-add_executable(main.cpp ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+add_executable(scr STATIC ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
 target_link_libraries(scr PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/scr)
 
 if(BUILD_TESTS)
