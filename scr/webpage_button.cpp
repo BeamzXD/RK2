@@ -113,9 +113,3 @@ void RunMainLogic()
     button.ChangeCommand(&genericCommand);
     button.Click();
 }
-
-int main()
-{
-    // RunMainLogic();
-    return 0;
-}
